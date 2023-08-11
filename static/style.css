@@ -1,0 +1,232 @@
+body {
+    margin-top: 30px;
+    background-color: #333;
+    color: #f5f5f5;
+    transition: background-color 0.3s ease;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+button {
+    background-color: #c0c0c0;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+section {
+    padding: 20px;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode header {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode button {
+    background-color: #333;
+    color: #fff;
+}
+
+/* 네비게이션 바 */
+nav ul {
+    width: 100%;
+    background-color: rgba(44, 42, 39, 0.983);
+    list-style-type: none;
+    /* 마진 패딩 지정하지 않으면 브라우저 기본 스타일을 따라 설정되므로 오버라이딩 필요 */
+    margin: 0;
+    padding: 0;
+}
+
+/* li 는 블록요소인데 inline-block 으로 인라인속성 부여해서 나란히 배치 */
+
+nav ul li {
+    display: inline-block;
+}
+
+.user {
+    background-color: cadetblue;
+    width: 150px;
+    text-align: center;
+    font-weight: bold;
+    float: right;
+}
+
+.dropdown {
+    position: relative;
+    -webkit-appearance: none;
+}
+
+.dropdown-menu {
+    /*background-color: cadetblue; */
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.user_name {
+    /*background-color: cadetblue; */
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* dropdown-menu 에는 hover 적용이 안됨 */
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.user:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+
+.dropdown-menu:hover:not(.user) {
+    background-color: cadetblue;
+    color: white;
+}
+
+.user_name:hover:not(.user) {
+    background-color: cadetblue;
+    color: white;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #333;
+    color: #fff;
+}
+
+
+#location_input {
+    display: flex;
+    align-items: center;
+}
+
+.input-auto-height {
+    height: 1rem;
+    width: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#content_box {
+    display: flex;
+
+}
+
+#left_box {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 10px;
+    width: 600px;
+}
+
+
+
+#overchat {
+    display: flex;
+}
+
+/* chat */
+#current-user {
+    height: 400px;
+    max-width: 150px;
+    width: 50%;
+    background-color: #333;
+    overflow-y: scroll;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: #fff;
+    /* 테두리 스타일 설정 */
+}
+
+
+#chat-container {
+    max-width: 800px;
+
+    height: 400px;
+    width: 100%;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    /* 테두리 스타일 설정 */
+}
+
+
+#messages {
+    height: 325px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
+
+#chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+}
+
+#myMessage {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+}
+
+
+#chat-main {
+    display: flex;
+    width: 500px;
+    margin-top: auto;
+}

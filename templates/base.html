@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HsCode{% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.min.js"></script>
+    <link rel="stylesheet" href="../static/style.css?after">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li class="dropdown">
+                <div class="dropdown-menu">메뉴 1</div>
+            </li>
+            <li class="dropdown">
+                <div class="dropdown-menu">메뉴 2</div>
+            </li>
+            <li class="dropdown">
+                <div class="dropdown-menu">메뉴 3</div>
+            </li>
+
+            <li class="user">
+                <div class="user_name" id="username">{{username}}</div>
+                <div class="dropdown-content">
+                    <a href="/sign-in" class="nav-link">Sign In</a>
+                    <a href="/sign-up" class="nav-link">Sign Up</a>
+                    <a href="/logout" class="nav-link">Logout</a>
+                    <a href="/" class="nav-link">Home</a>
+                </div>
+            </li>
+        </ul>
+
+    </nav>
+
+    <header>
+    </header>
+
+
+    <!-- Message Flashing -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == "error" %}
+
+    <!-- error 메시지 -->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{message}}
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+    </div>
+
+    {% elif category == "success" %}
+
+    <!-- success 메시지 -->
+    <div class='alert alert-success alert-dismissible fade show' role='alert'>
+        {{message}}
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+    </div>
+
+    {% endif %}
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1>{% block description %}{% endblock %}</h1>
+    <div id="content_box">
+        <div id="left_box">
+            <div>
+                <h2>채팅창</h2>
+                <main id="chat-main">
+                    <div id="chat-container">
+                        <div id="messages">
+                            <!-- 채팅 메시지들이 동적으로 추가될 공간 -->
+                        </div>
+                        <div id="chat-input">
+                            <input type="text" id="myMessage" placeholder="메시지를 입력하세요">
+                            <button id="sendbutton">전송</button>
+                        </div>
+                    </div>
+                    <div id="current-user">
+                    </div>
+                </main>
+
+            </div>
+            <div id='overchat'>
+                {% block overchat %}
+                {% endblock %}
+            </div>
+        </div>
+        <!-- content -->
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+
+<script src="../static/script.js"></script>
+
+</html>
