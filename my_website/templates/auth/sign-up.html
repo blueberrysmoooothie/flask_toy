@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}sign up{% endblock %}
+
+{% block description %}
+<h1>회원 가입 페이지</h1>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <form method="POST">
+        <h2 align="center">Sign Up</h2>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>초대 코드</td>
+                    <td>
+                        <input name="invitekey" type="text" class="form-control">
+                        <!-- <div id="emailHelp" class="form-text">초대자로 부터 공유받은 코드를 입력하세요</div> -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>
+                        <input name="userid" type="text" class="form-control">
+                        <!-- <div id="emailHelp" class="form-text">가입할 이메일을 입력하세요</div> -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>이름(닉네임)</td>
+                    <td>
+                        <input name="nickname" type="text" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td>
+                        <input name="password1" type="password" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>비밀번호 재확인</td>
+                    <td>
+                        <input name="password2" type="password" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button type="submit" class="btn btn-primary">제출</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+</div>
+
+{% endblock %}

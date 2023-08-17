@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}sign in{% endblock %}
+
+{% block description %}
+<h1>로그인 페이지</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="/auth/sign-in">
+        <h2 align="center">Sign In</h2>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>
+                        <input name="id" type="text" class="form-control" id="InputId">
+                    </td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td>
+                        <input name="password1" type="password" class="form-control" id="InputPassword1">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button type="submit" class="btn btn-primary">로그인</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+{% endblock %}

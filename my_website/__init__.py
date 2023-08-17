@@ -1,8 +1,15 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
 
+def create_app():
+    app = Flask(__name__)
+    app.config["SECRET_KEY"] = "test key"
 
-@app.route("/")
-def index():
-    return render_template("./base.html")
+    # 블루프린트 인스턴스
+    from .view import view
+    from .auth import auth
+
+    app.register_blueprint(view, url_prefix="/")
+    app.register_blueprint(auth, url_prefix="/auth")
+
+    return app
