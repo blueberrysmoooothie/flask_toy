@@ -1,11 +1,12 @@
 import pymysql
-from settings import DB_HOST, DB_ADMIN_ID, DB_ADMIN_PW, DB_NAME
+from settings import DB_HOST, DB_PORT, DB_ADMIN_ID, DB_ADMIN_PW, DB_NAME
 
 
 class Database:
     def __init__(self):
-        self.db = pymysql(
+        self.db = pymysql.connect(
             host=DB_HOST,
+            port=DB_PORT,
             user=DB_ADMIN_ID,
             passwd=DB_ADMIN_PW,
             db=DB_NAME,
