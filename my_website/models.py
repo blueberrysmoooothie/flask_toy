@@ -1,5 +1,6 @@
 from flask import session
 from passlib.hash import pbkdf2_sha256
+import keras_ocr
 from secret import SALT
 
 
@@ -44,3 +45,16 @@ class User:
     def check_password(cls, password, hashed_password):
         check = pbkdf2_sha256.verify(password + SALT, hashed_password)
         return check
+
+
+# https://frhyme.github.io/python-lib/flask_matplotlib/
+class TextDetect:
+    pipline = keras_ocr.pipeline.Pipeline()
+
+    def detect(self, images=None):
+        if images is None:
+            imges = [keras_ocr.tools.read("input/test.png")]
+        prediction_groups = TextDetect.pipline.recognize(images)
+        keras_ocr.tools.drawAnnotations(
+            image=images[0], predictions=prediction_groups[0]
+        )
