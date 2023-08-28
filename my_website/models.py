@@ -3,16 +3,18 @@ from passlib.hash import pbkdf2_sha256
 import keras_ocr
 import matplotlib.pyplot as plt
 from io import BytesIO, StringIO
+from my_website.module import dbModule
 from secret import SALT
 
 
 class User:
     user_list_ = []
     user_data_ = {}
+    user_data_table = "USER_DATA"
 
     @classmethod
     def sign_in(cls, id, password):
-        if id in User.user_list_:
+        if id in User.user_data_:
             user_info = User.user_data_[id]
 
             if cls.check_password(password, user_info["user_password_"]):
@@ -32,6 +34,7 @@ class User:
             "user_name_": nickname,
             "user_password_": cls.hash_password(password),
         }
+        User.insert_userdata(userid, User.user_data_[userid])
 
     @classmethod
     def dup_check(cls, userid):
@@ -47,6 +50,61 @@ class User:
     def check_password(cls, password, hashed_password):
         check = pbkdf2_sha256.verify(password + SALT, hashed_password)
         return check
+
+    @classmethod
+    def read_userdata(cls):
+        db_class = dbModule.Database()
+        sql = f"SELECT * FROM {dbModule.DB_NAME}.{cls.user_data_table}"
+        row = db_class.executeAll(sql)
+        db_class.db.close()
+
+        key = "user_id_"
+        result = {}
+        for data in row:
+            result[data[key]] = {
+                "user_name_": data["user_name_"],
+                "user_password_": data["user_password_"],
+            }
+
+        User.user_data_ = result
+
+    @classmethod
+    def insert_userdata(cls, userid, data):
+        db_class = dbModule.Database()
+        sql = f"INSERT INTO {dbModule.DB_NAME}.{cls.user_data_table}(user_name_,user_id_, user_password_)\
+            VALUES('{data['user_name_']}', '{userid}', '{data['user_password_']}');"
+        db_class.execute(sql)
+        db_class.commit()
+        db_class.db.close()
+
+    @classmethod
+    def update_userdata(cls, userid, nickname=None, password=None):
+        if nickname is None:
+            nickname = cls.user_data_[userid]["user_name_"]
+        if password is None:
+            password = cls.user_data_[userid]["user_password_"]
+        else:
+            password = pbkdf2_sha256.hash(password + SALT)
+
+        db_class = dbModule.Database()
+        sql = f"UPDATE {dbModule.DB_NAME}.{cls.user_data_table}\
+            SET user_name_ =  '{nickname}', user_password_ = '{password}'\
+            WHERE user_id_='{userid}'"
+        db_class.execute(sql)
+        db_class.commit()
+        db_class.db.close()
+
+    @classmethod
+    def delete_userdata(cls, userid):
+        db_class = dbModule.Database()
+        sql = f"DELETE {dbModule.DB_NAME}.{cls.user_data_table}\
+            WHERE user_id_='{userid}'"
+        db_class.execute(sql)
+        db_class.commit()
+        db_class.db.close()
+
+
+User.read_userdata()
 
 
 # https://frhyme.github.io/python-lib/flask_matplotlib/
