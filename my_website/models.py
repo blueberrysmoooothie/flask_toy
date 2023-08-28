@@ -1,6 +1,7 @@
 from flask import session
 from passlib.hash import pbkdf2_sha256
-import keras_ocr
+
+# import keras_ocr
 import matplotlib.pyplot as plt
 from io import BytesIO, StringIO
 from my_website.module import dbModule
@@ -108,19 +109,19 @@ User.read_userdata()
 
 
 # https://frhyme.github.io/python-lib/flask_matplotlib/
-class TextDetect:
-    pipline = keras_ocr.pipeline.Pipeline()
+# class TextDetect:
+#     pipline = keras_ocr.pipeline.Pipeline()
 
-    @classmethod
-    def detect(cls, images=None):
-        if images is None:
-            images = [keras_ocr.tools.read("my_website/input/test.png")]
-        prediction_groups = TextDetect.pipline.recognize(images)
-        plt.figure(figsize=(4, 3))
-        keras_ocr.tools.drawAnnotations(
-            image=images[0], predictions=prediction_groups[0]
-        )
-        img = BytesIO()
-        plt.savefig(img, format="png", dpi=300)
-        img.seek(0)
-        return img
+#     @classmethod
+#     def detect(cls, images=None):
+#         if images is None:
+#             images = [keras_ocr.tools.read("my_website/input/test.png")]
+#         prediction_groups = TextDetect.pipline.recognize(images)
+#         plt.figure(figsize=(4, 3))
+#         keras_ocr.tools.drawAnnotations(
+#             image=images[0], predictions=prediction_groups[0]
+#         )
+#         img = BytesIO()
+#         plt.savefig(img, format="png", dpi=300)
+#         img.seek(0)
+#         return img
